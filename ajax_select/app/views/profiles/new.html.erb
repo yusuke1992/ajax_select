@@ -1,0 +1,20 @@
+<%= form_for(@profile) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="prefecture-area">
+    <%= label :prefecture_id %><br>
+    <%= collection_select :profile, :prefecture_id, Prefecture.all, :id, :name %>
+  </div>
+  
+  <div class="city-area">
+    <%= render partial: 'select_city', locals: {prefecture_id: Prefecture.first.id} %>
+  </div>
+<% end %>
